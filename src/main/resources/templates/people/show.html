@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+</head>
+<body>
+
+<p th:text="'Id: ' + ${person.getPerson_id()}">id</p>
+<p th:text="'Name and surname: ' + ${person.getName_surname()}">name and surname</p>
+<p th:text="'Age of birth: ' + ${person.getAge_of_birth()}">age of birth</p>
+<br/>
+<span>Holded books:</span>
+<span th:unless="${books.isEmpty()}">
+    <div th:each="book : ${books}">
+        <a th:href="@{/books/{id}(id=${book.getBook_id()})}"
+        th:text="${book.getBook_name + ', ' + book.getYear_of_writing()}">books</a>
+    </div>
+</span>
+<span th:if="${books.isEmpty()}">
+    Empty!
+</span>
+<br/>
+<form th:action="@{/people/{id}/edit(id=${person.getPerson_id()})}">
+    <input type="submit" value="Edit">
+</form>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

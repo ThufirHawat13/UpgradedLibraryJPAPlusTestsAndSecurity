@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create book</title>
+</head>
+<body>
+
+    <form th:method="POST" th:action="@{/books}" th:object="${book}">
+        <label for="name">Enter name: </label>
+        <input type="text" th:field="*{book_name}" id="name"/>
+        <br/>
+        <label for="author">Enter author: </label>
+        <input type="text" th:field="*{author}" id="author"/>
+        <br/>
+        <label for="year">Enter year of writing: </label>
+        <input type="text" th:field="*{year_of_writing}" id="year"/>
+        <br/>
+        <input type="submit" value="Create"/>
+    </form>
+
+</body>
+</html>
