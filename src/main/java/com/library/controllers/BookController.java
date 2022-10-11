@@ -7,9 +7,11 @@ import com.library.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebParam;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -54,7 +56,8 @@ public class BookController {
     }
 
     @PostMapping()
-    public String create(Model model, Book book) {
+    public String create(Model model,@Valid Book book, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) return "books/new";
 
         model.addAttribute("book", book);
         bookDAO.save(book);
@@ -69,7 +72,7 @@ public class BookController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@PathVariable("id") int id, Model model, Book book) {
+    public String update(@PathVariable("id") int id, Model model, @Valid Book book) {
 
         model.addAttribute("book", book);
         bookDAO.update(id, book);

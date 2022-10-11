@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -29,6 +27,12 @@ public class PersonDAO {
 
         return jdbcTemplate.query("SELECT * FROM person WHERE person_id = ?", new Object[]{id}
                 , new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
+    }
+
+    public Person show(String name_surname) {
+
+        return jdbcTemplate.query("SELECT * FROM person WHERE name_surname = ?", new  Object[]{name_surname},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
     }
 
     public void save(Person person) {

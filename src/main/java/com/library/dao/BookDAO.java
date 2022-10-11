@@ -44,14 +44,14 @@ public class BookDAO {
 
         jdbcTemplate.update("INSERT INTO book(book_name, year_of_writing, author) " +
                         "VALUES(?, ?, ?)",
-                book.getBook_name(), book.getYear_of_writing(), book.getAuthor());
+                book.getBook_name(), Integer.parseInt(book.getYear_of_writing()), book.getAuthor());
     }
 
     public void update(int id, Book book) {
 
         jdbcTemplate.update("UPDATE book SET book_name=?, year_of_writing=?, author=? " +
                 "WHERE book_id=?",
-                book.getBook_name(), book.getYear_of_writing(), book.getAuthor(), id);
+                book.getBook_name(), Integer.parseInt(book.getYear_of_writing()), book.getAuthor(), id);
     }
 
     public void delete(int id) {

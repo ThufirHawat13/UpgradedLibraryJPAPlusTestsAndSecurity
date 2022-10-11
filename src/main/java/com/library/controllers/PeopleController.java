@@ -2,22 +2,28 @@ package com.library.controllers;
 
 import com.library.dao.PersonDAO;
 import com.library.models.Person;
+import com.library.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.sql.SQLException;
+
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
 
     private final PersonDAO personDAO;
+    private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -43,7 +49,9 @@ public class PeopleController {
     }
 
     @PostMapping()
-    public String create(Person person, Model model) {
+    public String create(Model model, @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
+        if(bindingResult.hasErrors())  return "people/new";
 
         model.addAttribute("person", person);
         personDAO.save(person);
@@ -58,11 +66,17 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@PathVariable("id") int id, Model model, Person person) {
+    public String update(@PathVariable("id") int id, Model model, @Valid Person person, BindingResult bindingResult) {
 
+        if(bindingResult.hasErrors()) return "people/edit";
+    try{
         model.addAttribute("person", person);
         personDAO.update(person, id);
         return "redirect:/people";
+    }catch(Exception e) {
+        personValidator.validate(person, bindingResult);
+        return "people/edit";
+    }
     }
 
     @DeleteMapping("/{id}")
