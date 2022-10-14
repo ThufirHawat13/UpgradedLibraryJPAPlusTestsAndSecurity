@@ -58,4 +58,9 @@ public class PersonDAO {
         return  jdbcTemplate.query("SELECT * FROM book WHERE person_id=?", new Object[]{id},
                 new BeanPropertyRowMapper<>(Book.class));
     }
+    public List<Person> personSearch(String name) {
+
+        return jdbcTemplate.query("SELECT * FROM person WHERE name_surname LIKE '%" + name + "%'",
+                new BeanPropertyRowMapper<>(Person.class));
+    }
 }

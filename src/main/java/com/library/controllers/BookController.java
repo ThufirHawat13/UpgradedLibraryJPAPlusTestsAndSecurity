@@ -32,6 +32,7 @@ public class BookController {
     public String index(Model model) {
 
         model.addAttribute("books", bookDAO.index());
+        model.addAttribute("name", new String());
         return "books/index";
     }
 
@@ -102,6 +103,15 @@ public class BookController {
         bookDAO.releaseHolder(id);
         return "redirect:/books/" + id;
     }
+
+    @PostMapping("/search")
+    public String searchBook(@RequestParam("name") String name, Model model) {
+
+        model.addAttribute("result" ,bookDAO.searchBook(name));
+        return "books/search";
+    }
+
+
 
 
 }

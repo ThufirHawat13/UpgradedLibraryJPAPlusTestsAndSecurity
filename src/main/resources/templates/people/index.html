@@ -5,6 +5,11 @@
     <title>All people</title>
 </head>
 <body>
+<form method="POST" th:action="@{/people/search}">
+    <label for="name">Try to enter name (and/or) surname:</label><br/>
+    <input id="name" type="text" name="name">
+    <input type="submit" value="Search!">
+</form>
 
 <div th:each="person : ${people}">
     <a      th:href="@{/people/{id}(id=${person.getPerson_id()})}"

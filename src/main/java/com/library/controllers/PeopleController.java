@@ -86,5 +86,12 @@ public class PeopleController {
         return "redirect:/people";
     }
 
+    @PostMapping("/search")
+    public String searchPersonFromName(@RequestParam("name") String name, Model model) {
+
+        model.addAttribute("result", personDAO.personSearch(name));
+        return "/people/search";
+    }
+
 
 }

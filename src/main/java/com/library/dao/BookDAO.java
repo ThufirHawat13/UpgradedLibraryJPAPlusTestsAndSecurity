@@ -76,4 +76,10 @@ public class BookDAO {
 
         jdbcTemplate.update("UPDATE book SET person_id=null WHERE book_id=?", id);
     }
+
+    public List<Book> searchBook(String name) {
+
+        return jdbcTemplate.query("SELECT * FROM book WHERE book_name LIKE '%" + name + "%'",
+                new BeanPropertyRowMapper<>(Book.class));
+    }
 }

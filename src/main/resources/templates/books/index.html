@@ -5,6 +5,11 @@
     <title>All books</title>
 </head>
 <body>
+<form method="POST" th:action="@{/books/search}"><br/>
+    <label for="name" >Try to enter book name:</label>
+    <input type="text" id="name" name="name">
+    <input type="submit" value="Search!">
+</form>
 
 <div th:each="book : ${books}">
     <a   th:href="@{/books/{id}(id=${book.getBook_id()})}"

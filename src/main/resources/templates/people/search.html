@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Searching result:</p>
+<div th:each="person : ${result}">
+    <a th:href="@{/people/{id}(id=${person.getPerson_id()})}"
+        th:text="${person.getName_surname()}">Name</a>
+</div>
+
+</body>
+</html>
