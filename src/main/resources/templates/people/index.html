@@ -12,8 +12,8 @@
 </form>
 
 <div th:each="person : ${people}">
-    <a      th:href="@{/people/{id}(id=${person.getPerson_id()})}"
-            th:text="${person.getName_surname()}">person</a>
+    <a      th:href="@{/people/{id}(id=${person.getPersonId()})}"
+            th:text="${person.getNameSurname()}">person</a>
 </div>
 
 <form th:action="@{/people/new}">

@@ -1,53 +1,72 @@
 package com.library.models;
 
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
-
+@Entity
+@Table(name = "person")
 public class Person {
 
-    private int person_id;
+    @Id
+    @Column(name = "person_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int personId;
 
+    @Column(name = "name_surname")
     @NotEmpty(message = "This field shouldn't be empty!" )
     @Pattern(regexp = "[A-Z]\\w{1,15} [A-Z]\\w{1,20}", message = "Input correct name and surname!")
-    private String name_surname;
+    private String nameSurname;
 
+    @Column(name = "age_of_birth")
     @NotEmpty(message = "This field shouldn't be empty!")
     @Pattern(regexp = "\\d{4}", message = "Input correct age of birth!")
     @Min(value = 1920, message = "Age should be greater then 1920!")
-    private String age_of_birth;
+    private String dateOfBirth;
 
-    public Person(int person_id, String name_surname, String date_of_birth) {
-        this.person_id = person_id;
-        this.name_surname = name_surname;
-        this.age_of_birth = date_of_birth;
+    @OneToMany(mappedBy = "person")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Book book;
+
+    public Person(String nameSurname, String dateOfBirth) {
+        this.nameSurname = nameSurname;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Person() {
     }
 
-    public int getPerson_id() { return person_id; }
+    public int getPerson_id() { return personId; }
 
 
     public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+        this.personId = person_id;
     }
 
     public String getName_surname() {
-        return name_surname;
+        return nameSurname;
     }
 
     public void setName_surname(String name_surname) {
-        this.name_surname = name_surname;
+        this.nameSurname = name_surname;
     }
 
     public String getAge_of_birth() {
-        return age_of_birth;
+        return dateOfBirth;
     }
 
     public void setAge_of_birth(String age_of_birth) {
-        this.age_of_birth = age_of_birth;
+        this.dateOfBirth = age_of_birth;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }
