@@ -15,18 +15,17 @@ public class Book {
     @Id
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int book_id;
+    private int bookId;
 
     @Column(name = "book_name")
     @NotNull(message = "This field shouldn't be empty!")
     @Pattern(regexp = "[A-Z\\d].*{1,100}", message = "Input correct book name!")
-    private String book_name;
+    private String bookName;
 
     @Column(name = "year_of_writing")
     @NotNull(message = "This field shouldn't be empty")
-    @Pattern(regexp  = "\\d{3,4}", message = "Input correct year of writing!")
     @Min(value = 500, message = "Year of writing should be greater then 500!")
-    private String year_of_writing;
+    private int yearOfWriting;
 
     @Column(name = "author")
     @NotNull(message = "This field shouldn't be empty!")
@@ -40,39 +39,37 @@ public class Book {
     private Person person;
 
 
-    public Book(String book_name, String year_of_writing, String author) {
-        this.book_name = book_name;
-        this.year_of_writing = year_of_writing;
+    public Book(String bookName, int yearOfWriting, String author) {
+        this.bookName = bookName;
+        this.yearOfWriting = yearOfWriting;
         this.author = author;
     }
 
     public Book() {
     }
 
-    public int getBook_id() {
-        return book_id;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    public String getBook_name() {
-        return book_name;
+    public String getBookName() {
+        return bookName;
     }
 
-
-    public void setBook_name(String book_name) {
-        this.book_name = book_name;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-
-    public String getYear_of_writing() {
-        return year_of_writing;
+    public int getYearOfWriting() {
+        return yearOfWriting;
     }
 
-    public void setYear_of_writing(String year_of_writing) {
-        this.year_of_writing = year_of_writing;
+    public void setYearOfWriting(int yearOfWriting) {
+        this.yearOfWriting = yearOfWriting;
     }
 
     public String getAuthor() {

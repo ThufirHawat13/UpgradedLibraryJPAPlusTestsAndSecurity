@@ -3,9 +3,11 @@ package com.library.models;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -23,50 +25,52 @@ public class Person {
 
     @Column(name = "age_of_birth")
     @NotEmpty(message = "This field shouldn't be empty!")
-    @Pattern(regexp = "\\d{4}", message = "Input correct age of birth!")
     @Min(value = 1920, message = "Age should be greater then 1920!")
-    private String dateOfBirth;
+    @Pattern(regexp = "\\d{4}", message = "Input correct age of birth!")
+    @Max(value = 2010, message = "Age shouldn't be greater then 2010!")
+    private String ageOfBirth;
 
     @OneToMany(mappedBy = "person")
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    private Book book;
+    private List<Book> books;
 
-    public Person(String nameSurname, String dateOfBirth) {
+    public Person(String nameSurname, String ageOfBirth) {
         this.nameSurname = nameSurname;
-        this.dateOfBirth = dateOfBirth;
+        this.ageOfBirth = ageOfBirth;
     }
 
     public Person() {
     }
 
-    public int getPerson_id() { return personId; }
-
-
-    public void setPerson_id(int person_id) {
-        this.personId = person_id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public String getName_surname() {
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+
+    public String getNameSurname() {
         return nameSurname;
     }
 
-    public void setName_surname(String name_surname) {
-        this.nameSurname = name_surname;
+    public void setNameSurname(String nameSurname) {
+        this.nameSurname = nameSurname;
     }
 
-    public String getAge_of_birth() {
-        return dateOfBirth;
+    public String getAgeOfBirth() {
+        return ageOfBirth;
     }
 
-    public void setAge_of_birth(String age_of_birth) {
-        this.dateOfBirth = age_of_birth;
+    public void setAgeOfBirth(String dateOfBirth) {
+        this.ageOfBirth = dateOfBirth;
     }
 
-    public Book getBook() {
-        return book;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

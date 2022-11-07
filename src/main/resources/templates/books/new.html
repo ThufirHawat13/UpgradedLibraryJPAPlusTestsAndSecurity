@@ -8,16 +8,16 @@
 
     <form th:method="POST" th:action="@{/books}" th:object="${book}">
         <label for="name">Enter name: </label>
-        <input type="text" th:field="*{book_name}" id="name"/>
-        <div style="color:red" th:if="${#fields.hasErrors('book_name')}" th:errors="*{book_name}">Name error</div>
+        <input type="text" th:field="*{bookName}" id="name"/>
+        <div style="color:red" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}">Name error</div>
         <br/>
         <label for="author">Enter author: </label>
         <input type="text" th:field="*{author}" id="author"/>
         <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author error</div>
         <br/>
         <label for="year">Enter year of writing: </label>
-        <input type="text" th:field="*{year_of_writing}" id="year"/>
-        <div style="color:red" th:if="${#fields.hasErrors('year_of_writing')}" th:errors="*{author}">Year error</div>
+        <input type="text" th:field="*{yearOfWriting}" id="year"/>
+        <div style="color:red" th:if="${#fields.hasErrors('yearOfWriting')}" th:errors="*{yearOfWriting}">Year error</div>
         <br/>
         <input type="submit" value="Create"/>
     </form>

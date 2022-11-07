@@ -18,14 +18,12 @@ import javax.validation.Valid;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PersonDAO personDAO;
     private final BookService bookService;
     private final PeopleService peopleService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, BookService bookService, PeopleService peopleService, PersonValidator personValidator) {
-        this.personDAO = personDAO;
+    public PeopleController(BookService bookService, PeopleService peopleService, PersonValidator personValidator) {
         this.bookService = bookService;
         this.peopleService = peopleService;
         this.personValidator = personValidator;
@@ -67,7 +65,7 @@ public class PeopleController {
     @GetMapping("/{id}/edit")
     public String editPerson(@PathVariable("id") int id, Model model) {
 
-        model.addAttribute("person", personDAO.show(id));
+        model.addAttribute("person", peopleService.findById(id));
         return "people/edit";
     }
 

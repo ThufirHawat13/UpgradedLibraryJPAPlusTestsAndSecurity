@@ -8,12 +8,12 @@
 
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <label for="name">Enter name and surname: </label>
-    <input type="text" th:field="*{name_surname}" id="name">
-    <div style="color:red" th:if="${#fields.hasErrors('name_surname')}" th:errors="*{name_surname}">Name error</div>
+    <input type="text" th:field="*{nameSurname}" id="name">
+    <div style="color:red" th:if="${#fields.hasErrors('nameSurname')}" th:errors="*{nameSurname}">Name error</div>
     <br/>
     <label for="age">Enter age of birth: </label>
-    <input type="text" th:field="*{age_of_birth}" id="age">
-    <div style="color:red" th:if="${#fields.hasErrors('age_of_birth')}" th:errors="*{age_of_birth}">Age error</div>
+    <input type="text" th:field="*{ageOfBirth}" id="age">
+    <div style="color:red" th:if="${#fields.hasErrors('ageOfBirth')}" th:errors="*{ageOfBirth}">Age error</div>
     <br/>
     <input type="submit" value="Create">
 </form>

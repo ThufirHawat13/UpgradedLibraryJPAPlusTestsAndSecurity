@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBook_id()})}" th:object="${book}">
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBookId()})}" th:object="${book}">
     <label for="name">Enter name: </label>
-    <input type="text" th:field="*{book_name}" id="name"/>
+    <input type="text" th:field="*{bookName}" id="name"/>
     <br/>
     <label for="year">Enter year of writing: </label>
-    <input type="text" th:field="*{year_of_writing}" id="year"/>
+    <input type="text" th:field="*{yearOfWriting}" id="year"/>
     <br/>
     <label for="author">Enter author: </label>
     <input type="text" th:field="*{author}" id="author"/>

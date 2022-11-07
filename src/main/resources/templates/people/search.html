@@ -7,8 +7,8 @@
 <body>
 <p>Searching result:</p>
 <div th:each="person : ${result}">
-    <a th:href="@{/people/{id}(id=${person.getPerson_id()})}"
-        th:text="${person.getName_surname()}">Name</a>
+    <a th:href="@{/people/{id}(id=${person.getPersonId()})}"
+        th:text="${person.getNameSurname()}">Name</a>
 </div>
 
 </body>

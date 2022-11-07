@@ -1,5 +1,6 @@
 package com.library.services;
 
+import com.library.models.Book;
 import com.library.models.Person;
 import com.library.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class PeopleService {
     }
 
     public List<Person> findByName(String name) {
-        return peopleRepository.findByNameSurname(name);
+        return peopleRepository.findByNameSurnameContaining(name);
     }
 
     @Transactional
@@ -40,7 +41,7 @@ public class PeopleService {
 
     @Transactional
     public void update(int id, Person updPerson) {
-        updPerson.setPerson_id(id);
+        updPerson.setPersonId(id);
         peopleRepository.save(updPerson);
     }
 
