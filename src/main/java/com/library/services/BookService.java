@@ -1,5 +1,6 @@
 package com.library.services;
 
+import com.library.DAO.BookDAO;
 import com.library.models.Book;
 import com.library.models.Person;
 import com.library.repositories.BookRepository;
@@ -15,9 +16,12 @@ import java.util.Optional;
 public class BookService {
     private final BookRepository bookRepository;
 
+    private final BookDAO bookDAO;
+
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, BookDAO bookDAO) {
         this.bookRepository = bookRepository;
+        this.bookDAO = bookDAO;
     }
 
     public List<Book> findAll() { return bookRepository.findAll(); }
@@ -52,14 +56,12 @@ public class BookService {
 
     @Transactional
     public void setHolder(int id, Person person) {
-        Book book = this.findById(id);
-        book.setPerson(person);
+        bookDAO.setHolder(id, person);
     }
 
     @Transactional
     public void releaseHolder(int id) {
-        Book book = this.findById(id);
-        book.setPerson(null);
+        bookDAO.releaseHolder(id);
     }
 
 

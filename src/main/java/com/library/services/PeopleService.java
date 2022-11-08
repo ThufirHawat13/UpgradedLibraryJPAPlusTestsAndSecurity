@@ -1,6 +1,5 @@
 package com.library.services;
 
-import com.library.models.Book;
 import com.library.models.Person;
 import com.library.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,13 @@ public class PeopleService {
         return person.orElse(null);
     }
 
-    public List<Person> findByName(String name) {
-        return peopleRepository.findByNameSurnameContaining(name);
+    public Person findByNameSurname(String name) {
+       Optional<Person> person = peopleRepository.findByNameSurname(name);
+       return person.orElse(null);
+    }
+
+    public List<Person> findByNameContains(String contains) {
+        return peopleRepository.findByNameSurnameContaining(contains);
     }
 
     @Transactional

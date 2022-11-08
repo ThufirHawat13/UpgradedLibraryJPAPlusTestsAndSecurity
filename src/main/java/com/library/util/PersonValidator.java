@@ -1,6 +1,6 @@
 package com.library.util;
 
-import com.library.dao.PersonDAO;
+
 import com.library.models.Person;
 import com.library.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,11 @@ import org.springframework.validation.Validator;
 @Component
 public class PersonValidator implements Validator {
 
-    private final PersonDAO personDAO;
 
     private final PeopleService peopleService;
 
     @Autowired
-    public PersonValidator(PersonDAO personDAO, PeopleService peopleService) {
-        this.personDAO = personDAO;
+    public PersonValidator(PeopleService peopleService) {
         this.peopleService = peopleService;
     }
 
@@ -30,8 +28,9 @@ public class PersonValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Person person = (Person)target;
 
-        if(peopleService.findByName(person.getNameSurname()) !=null) {
-            errors.rejectValue("name_surname", "", "This name and surname is already exists in database!");
+        if(peopleService.findByNameSurname(person.getNameSurname()) !=null) {
+            errors.rejectValue("nameSurname", "",
+                    "This name and surname is already exists in database!");
         }
 
     }

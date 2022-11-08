@@ -1,6 +1,6 @@
 package com.library.controllers;
 
-import com.library.dao.PersonDAO;
+
 import com.library.models.Person;
 import com.library.services.BookService;
 import com.library.services.PeopleService;
@@ -93,7 +93,7 @@ public class PeopleController {
     @PostMapping("/search")
     public String searchPersonFromName(@RequestParam("name") String name, Model model) {
 
-        model.addAttribute("result", peopleService.findByName(name));
+        model.addAttribute("result", peopleService.findByNameContains(name));
         return "/people/search";
     }
 
