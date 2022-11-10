@@ -30,6 +30,11 @@ public class BookService {
         Optional<Book> book = bookRepository.findById(id);
         return book.orElse(null);
     }
+
+    public Person haveOwner(Book book) {
+        return book.getPerson();
+    }
+
     public List<Book> findByOwner(Person person) {
         return bookRepository.findByPerson(person);
     }

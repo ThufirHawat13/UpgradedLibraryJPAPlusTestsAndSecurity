@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Optional;
 
 
 @Entity
@@ -81,7 +82,7 @@ public class Book {
     }
 
     public Person getPerson() {
-        return person;
+        return this.person;
     }
 
     public void setPerson(Person person) {
