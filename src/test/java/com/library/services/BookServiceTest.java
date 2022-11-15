@@ -19,16 +19,16 @@ class BookServiceTest {
 
     private final BookService bookService;
 
+    @Autowired
+    BookServiceTest(BookService bookService) {
+        this.bookService = bookService;
+    }
+
     @MockBean
     private BookRepository bookRepository;
 
     @MockBean
     private BookDAO bookDAO;
-
-    @Autowired
-    BookServiceTest(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @Test
     void findAll() {

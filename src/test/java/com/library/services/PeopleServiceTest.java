@@ -16,13 +16,13 @@ class PeopleServiceTest {
 
     private final PeopleService peopleService;
 
-    @MockBean
-    private PeopleRepository peopleRepository;
-
     @Autowired
     PeopleServiceTest(PeopleService peopleService) {
         this.peopleService = peopleService;
     }
+
+    @MockBean
+    private PeopleRepository peopleRepository;
 
     @Test
     void save() {
