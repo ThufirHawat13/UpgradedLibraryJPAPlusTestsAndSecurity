@@ -24,14 +24,11 @@ public class LibraryUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(libraryUserRepository.findAll());
-        LibraryUser libraryUser = libraryUserRepository.findByUsername(username).orElse(null);
-
-        System.out.println(libraryUser);
+        Optional<LibraryUser> libraryUser = libraryUserRepository.findByUsername(username);
         if(libraryUser == null) {
             throw new UsernameNotFoundException("User not found!");
         }
 
-        return new LibraryUserDetails(libraryUser);
+        return new LibraryUserDetails(libraryUser.get());
     }
 }

@@ -51,7 +51,7 @@ class BookControllerTest {
     }
 
     @Test
-    void show() throws NullPointerException{
+    void show() {
         Mockito.when(bookService.findById(id)).thenReturn(book);
         bookController.show(id, model);
 
