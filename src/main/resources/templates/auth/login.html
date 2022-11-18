@@ -6,7 +6,10 @@
 </head>
 <body>
 
-<form name="f" method="post" action="/process_login">
+<form action="/auth/registration">
+    <input type="submit" value="Register new user">
+</form>
+<form method="POST" action="/process_login">
         <label for="username">Input username:</label>
         <input type="text" name="username" id="username">
         <br/>
