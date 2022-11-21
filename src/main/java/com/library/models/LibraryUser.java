@@ -17,6 +17,9 @@ public class LibraryUser {
     @Column(name = "user_password")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+
     public LibraryUser(String username, String password) {
         this.username = username;
         this.password = password;
@@ -49,12 +52,12 @@ public class LibraryUser {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "LibraryUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getRole() {
+        return role;
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 }

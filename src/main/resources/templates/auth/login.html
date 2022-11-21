@@ -10,6 +10,8 @@
     <input type="submit" value="Register new user">
 </form>
 <form method="POST" action="/process_login">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
         <label for="username">Input username:</label>
         <input type="text" name="username" id="username">
         <br/>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
@@ -8,6 +8,10 @@
 <a href="/books">all books</a>
 <br/>
 <a href="/people">all peoples</a>
+
+<form th:method="POST" th:action="@{/auth/logout}">
+    <input type="submit" value="Logout!">
+</form>
 
 </body>
 </html>

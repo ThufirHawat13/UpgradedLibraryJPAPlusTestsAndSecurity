@@ -24,6 +24,7 @@ public class RegistrationService {
     @Transactional(readOnly = false)
     public void register(LibraryUser libraryUser) {
         libraryUser.setPassword(passwordEncoder.encode(libraryUser.getPassword()));
+        libraryUser.setRole("ROLE_USER");
         libraryUserRepository.save(libraryUser);
     }
 
