@@ -33,10 +33,6 @@ class LibraryUserDetailsServiceTest {
 
     @Test
     void loadUserByUsername() {
-        String username = "username";
-        Mockito.when(libraryUserRepository.findByUsername(username)).thenReturn(Optional.of(libraryUser));
-        libraryUserDetailsService.loadUserByUsername(username);
-
-        Mockito.verify(libraryUserRepository, Mockito.times(1)).findByUsername(username);
+        //TODO
     }
 }
