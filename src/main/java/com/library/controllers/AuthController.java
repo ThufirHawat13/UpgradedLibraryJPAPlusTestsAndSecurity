@@ -45,9 +45,9 @@ public class AuthController {
   public String registerNewUser(@ModelAttribute("libraryUser") @Valid LibraryUser libraryUser,
       BindingResult bindingResult) {
     libraryUserValidator.validate(libraryUser, bindingResult);
-      if (bindingResult.hasErrors()) {
-          return "auth/registration";
-      }
+    if (bindingResult.hasErrors()) {
+      return "auth/registration";
+    }
 
     registrationService.register(libraryUser);
 

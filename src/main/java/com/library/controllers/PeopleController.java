@@ -56,9 +56,9 @@ public class PeopleController {
   @PostMapping()
   public String create(Model model, @Valid Person person, BindingResult bindingResult) {
     personValidator.validate(person, bindingResult);
-      if (bindingResult.hasErrors()) {
-          return "people/new";
-      }
+    if (bindingResult.hasErrors()) {
+      return "people/new";
+    }
 
     model.addAttribute("person", person);
     peopleService.save(person);
@@ -76,9 +76,9 @@ public class PeopleController {
   public String update(@PathVariable("id") int id, Model model, @Valid Person person,
       BindingResult bindingResult) {
 
-      if (bindingResult.hasErrors()) {
-          return "people/edit";
-      }
+    if (bindingResult.hasErrors()) {
+      return "people/edit";
+    }
     try {
       model.addAttribute("person", person);
       peopleService.update(id, person);

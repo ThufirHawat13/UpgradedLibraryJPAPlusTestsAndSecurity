@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin page</title>
+  <meta charset="UTF-8">
+  <title>Admin page</title>
 </head>
 <body>
-Admin page
+<div th:each="user : ${users}">
+  <p th:text="${user.getUsername()}">user</p>
+  <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+    <input type="submit" value="Delete user">
+  </form>
+</div>
 </body>
 </html>

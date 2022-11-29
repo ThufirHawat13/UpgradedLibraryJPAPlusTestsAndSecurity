@@ -41,11 +41,11 @@ public class BookController {
 
     Book book = bookService.findById(id);
     Person bookHolder = book.getPerson();
-      if (bookHolder == null) {
-          model.addAttribute("people", peopleService.findAll());
-      } else {
-          model.addAttribute("holder", bookHolder);
-      }
+    if (bookHolder == null) {
+      model.addAttribute("people", peopleService.findAll());
+    } else {
+      model.addAttribute("holder", bookHolder);
+    }
 
     model.addAttribute("person", new Person());
     model.addAttribute("book", book);
@@ -62,9 +62,9 @@ public class BookController {
 
   @PostMapping()
   public String create(Model model, @Valid Book book, BindingResult bindingResult) {
-      if (bindingResult.hasErrors()) {
-          return "books/new";
-      }
+    if (bindingResult.hasErrors()) {
+      return "books/new";
+    }
 
     model.addAttribute("book", book);
     bookService.save(book);
