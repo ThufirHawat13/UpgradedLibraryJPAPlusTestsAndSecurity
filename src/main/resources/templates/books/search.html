@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Result</title>
+  <meta charset="UTF-8">
+  <title>Result</title>
 </head>
 <body>
 <p>Searching result:</p>
 <div th:each="book : ${result}">
-    <a      th:href="@{/books/{id}(id=${book.getBookId()})}"
-            th:text="${book.getBookName()}"></a>
+  <a th:href="@{/books/{id}(id=${book.getBookId()})}"
+     th:text="${book.getBookName()}"></a>
 </div>
 
 

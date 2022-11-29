@@ -10,25 +10,25 @@ import org.springframework.validation.Validator;
 @Component
 public class LibraryUserValidator implements Validator {
 
-    private final LibraryUserService libraryUserService;
+  private final LibraryUserService libraryUserService;
 
-    @Autowired
-    public LibraryUserValidator(LibraryUserService libraryUserService) {
-        this.libraryUserService = libraryUserService;
+  @Autowired
+  public LibraryUserValidator(LibraryUserService libraryUserService) {
+    this.libraryUserService = libraryUserService;
+  }
+
+  @Override
+  public boolean supports(Class<?> clazz) {
+    return LibraryUser.class.equals(clazz);
+  }
+
+  @Override
+  public void validate(Object target, Errors errors) {
+    LibraryUser libraryUser = (LibraryUser) target;
+
+    if (libraryUserService.findByUsername(libraryUser.getUsername()) != null) {
+      errors.rejectValue("username", "",
+          "This username is already exists in database!");
     }
-
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return LibraryUser.class.equals(clazz);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        LibraryUser libraryUser = (LibraryUser) target;
-
-        if(libraryUserService.findByUsername(libraryUser.getUsername()) !=null) {
-            errors.rejectValue("username", "",
-                    "This username is already exists in database!");
-        }
-    }
+  }
 }

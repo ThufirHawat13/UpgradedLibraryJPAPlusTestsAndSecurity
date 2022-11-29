@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Edit person</title>
+  <meta charset="UTF-8">
+  <title>Edit person</title>
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getPersonId()})}" th:object="${person}">
-    <label for="name">Enter name and surname: </label>
-    <input type="text" th:field="*{nameSurname}" id="name"/>
-    <div style="color:red" th:if="${#fields.hasErrors('nameSurname')}" th:errors="*{nameSurname}">Name error</div>
-    <br/>
-    <label for="age">Enter age of birth(YYYY-MM-DD): </label>
-    <input type="text" th:field="*{ageOfBirth}" id="age"/>
-    <div style="color:red" th:if="${#fields.hasErrors('ageOfBirth')}" th:errors="*{ageOfBirth}">Age error</div>
-    <br/>
-    <input type="submit" value="Update"/>
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getPersonId()})}"
+      th:object="${person}">
+  <label for="name">Enter name and surname: </label>
+  <input type="text" th:field="*{nameSurname}" id="name"/>
+  <div style="color:red" th:if="${#fields.hasErrors('nameSurname')}" th:errors="*{nameSurname}">Name
+    error
+  </div>
+  <br/>
+  <label for="age">Enter age of birth(YYYY-MM-DD): </label>
+  <input type="text" th:field="*{ageOfBirth}" id="age"/>
+  <div style="color:red" th:if="${#fields.hasErrors('ageOfBirth')}" th:errors="*{ageOfBirth}">Age
+    error
+  </div>
+  <br/>
+  <input type="submit" value="Update"/>
 </form>
 
 </body>

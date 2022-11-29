@@ -17,40 +17,42 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final LibraryUserValidator libraryUserValidator;
+  private final LibraryUserValidator libraryUserValidator;
 
-    private final RegistrationService registrationService;
+  private final RegistrationService registrationService;
 
 
-    @Autowired
-    public AuthController(LibraryUserValidator libraryUserValidator, RegistrationService registrationService) {
-        this.libraryUserValidator = libraryUserValidator;
-        this.registrationService = registrationService;
-    }
+  @Autowired
+  public AuthController(LibraryUserValidator libraryUserValidator,
+      RegistrationService registrationService) {
+    this.libraryUserValidator = libraryUserValidator;
+    this.registrationService = registrationService;
+  }
 
-    @GetMapping("/login")
-    public String login() {
+  @GetMapping("/login")
+  public String login() {
 
-        return "auth/login";
-    }
+    return "auth/login";
+  }
 
-    @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("libraryUser") LibraryUser libraryUser) {
+  @GetMapping("/registration")
+  public String registrationPage(@ModelAttribute("libraryUser") LibraryUser libraryUser) {
 
-        return "auth/registration";
-    }
+    return "auth/registration";
+  }
 
-    @PostMapping("/registration")
-    public String registerNewUser(@ModelAttribute("libraryUser") @Valid LibraryUser libraryUser,
-                                  BindingResult bindingResult) {
-        libraryUserValidator.validate(libraryUser, bindingResult);
-        if(bindingResult.hasErrors()) return "auth/registration";
+  @PostMapping("/registration")
+  public String registerNewUser(@ModelAttribute("libraryUser") @Valid LibraryUser libraryUser,
+      BindingResult bindingResult) {
+    libraryUserValidator.validate(libraryUser, bindingResult);
+      if (bindingResult.hasErrors()) {
+          return "auth/registration";
+      }
 
-        registrationService.register(libraryUser);
+    registrationService.register(libraryUser);
 
-        return "redirect:/auth/login";
-    }
-
+    return "redirect:/auth/login";
+  }
 
 
 }

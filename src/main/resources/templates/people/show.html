@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Person</title>
+  <meta charset="UTF-8">
+  <title>Person</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 <span th:unless="${books.isEmpty()}">
     <div th:each="book : ${books}">
         <a th:href="@{/books/{id}(id=${book.getBookId()})}"
-        th:text="${book.getBookName + ', ' + book.getYearOfWriting()}">books</a>
+           th:text="${book.getBookName + ', ' + book.getYearOfWriting()}">books</a>
     </div>
 </span>
 <span th:if="${books.isEmpty()}">
@@ -22,11 +22,11 @@
 </span>
 <br/>
 <form th:action="@{/people/{id}/edit(id=${person.getPersonId()})}">
-    <input type="submit" value="Edit">
+  <input type="submit" value="Edit">
 </form>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPersonId()})}">
-    <input type="submit" value="Delete"/>
+  <input type="submit" value="Delete"/>
 </form>
 </body>
 </html>

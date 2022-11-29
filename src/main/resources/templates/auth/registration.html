@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Registration page</title>
+  <meta charset="UTF-8">
+  <title>Registration page</title>
 </head>
 <body>
-    <span>Register new user</span>
-    <p></p>
-    <form th:method="POST" th:action="@{/auth/registration}" th:object="${libraryUser}">
-        <label for="username">Input username:</label>
-        <input type="text" th:field="*{username}" id="username">
-        <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</div>
-        <br/>
-        <label for="password">Input password:</label>
-        <input type="text" th:field="*{password}" id="password">
-        <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password errors</div>
-        <br/>
-        <input type="submit" value="Register">
-    </form>
+<span>Register new user</span>
+<p></p>
+<form th:method="POST" th:action="@{/auth/registration}" th:object="${libraryUser}">
+  <label for="username">Input username:</label>
+  <input type="text" th:field="*{username}" id="username">
+  <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
+    errors
+  </div>
+  <br/>
+  <label for="password">Input password:</label>
+  <input type="text" th:field="*{password}" id="password">
+  <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+    errors
+  </div>
+  <br/>
+  <input type="submit" value="Register">
+</form>
 
 </body>
 </html>

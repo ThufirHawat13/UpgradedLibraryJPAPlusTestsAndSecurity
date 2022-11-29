@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-    List<Book> findByPerson(Person person);
+  List<Book> findByPerson(Person person);
 
-    List<Book> findByBookNameContaining(String containing);
+  List<Book> findByBookNameContaining(String containing);
 }

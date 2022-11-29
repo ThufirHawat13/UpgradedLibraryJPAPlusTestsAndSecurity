@@ -8,13 +8,13 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 @SpringBootApplication
 public class LibraryApplication {
 
-	@Bean
-	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-	return new HiddenHttpMethodFilter();
-	}
+  @Bean
+  public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+    return new HiddenHttpMethodFilter();
+  }
 
-	public static void main(String[] args) {
-		SpringApplication.run(LibraryApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(LibraryApplication.class, args);
+  }
 
 }

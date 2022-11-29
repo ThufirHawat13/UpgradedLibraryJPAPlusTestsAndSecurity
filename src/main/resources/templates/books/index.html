@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>All books</title>
+  <meta charset="UTF-8">
+  <title>All books</title>
 </head>
 <body>
 <form method="POST" th:action="@{/books/search}"><br/>
-    <label for="name" >Try to enter book name:</label>
-    <input type="text" id="name" name="name">
-    <input type="submit" value="Search!">
+  <label for="name">Try to enter book name:</label>
+  <input type="text" id="name" name="name">
+  <input type="submit" value="Search!">
 </form>
 
 <div th:each="book : ${books}">
-    <a   th:href="@{/books/{id}(id=${book.getBookId()})}"
-         th:text="${book.getBookName() + ', ' + book.getAuthor()}">book</a>
+  <a th:href="@{/books/{id}(id=${book.getBookId()})}"
+     th:text="${book.getBookName() + ', ' + book.getAuthor()}">book</a>
 </div>
 
 <form th:action="@{/books/new}">
-    <input type="submit" value="Add new book">
+  <input type="submit" value="Add new book">
 </form>
 
 

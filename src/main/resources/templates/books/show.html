@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:selectth="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:selectth="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>Book</title>
+  <meta charset="UTF-8">
+  <title>Book</title>
 </head>
 <body>
 
@@ -15,14 +16,16 @@
         <form th:method="PATCH" th:action="@{/books/{id}/setHolder(id=${book.getBookId()})}">
             <label for="person">Choose a book holder:</label>
             <select th:object="${person}" th:field="*{personId}" id="person">
-                <option th:each="sPerson : ${people}" th:value="${sPerson.getPersonId()}" th:text="${sPerson.getNameSurname()}"></option>
+                <option th:each="sPerson : ${people}" th:value="${sPerson.getPersonId()}"
+                        th:text="${sPerson.getNameSurname()}"></option>
             </select>
             <input type="submit" value="Set a holder">
         </form>
     </span>
-        <span th:if="${holder}">
+  <span th:if="${holder}">
 
-            <form th:method="PATCH" th:action="@{/books/{id}/releaseHolder(id=${book.getBookId()})}">
+            <form th:method="PATCH"
+                  th:action="@{/books/{id}/releaseHolder(id=${book.getBookId()})}">
                 <a th:href="@{/people/{id}(id=${holder.getPersonId()})}"
                    th:text="${holder.getNameSurname()}">book holder</a>
                 <input type="submit" value="Release a book"/>
@@ -31,11 +34,11 @@
 </div>
 <br/>
 <form th:action="@{/books/{id}/edit(id=${book.getBookId()})}">
-    <input type="submit" value="Edit"/>
+  <input type="submit" value="Edit"/>
 </form>
 
 <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBookId()})}">
-    <input type="submit" value="Delete"/>
+  <input type="submit" value="Delete"/>
 </form>
 </body>
 </html>

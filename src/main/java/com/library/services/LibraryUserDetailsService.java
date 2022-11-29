@@ -14,21 +14,21 @@ import java.util.Optional;
 @Service
 public class LibraryUserDetailsService implements UserDetailsService {
 
-    private final LibraryUserRepository libraryUserRepository;
+  private final LibraryUserRepository libraryUserRepository;
 
-    @Autowired
-    public LibraryUserDetailsService(LibraryUserRepository libraryUserRepository) {
-        this.libraryUserRepository = libraryUserRepository;
+  @Autowired
+  public LibraryUserDetailsService(LibraryUserRepository libraryUserRepository) {
+    this.libraryUserRepository = libraryUserRepository;
+  }
+
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Optional<LibraryUser> libraryUser = libraryUserRepository.findByUsername(username);
+    if (libraryUser == null) {
+      throw new UsernameNotFoundException("User not found!");
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<LibraryUser> libraryUser = libraryUserRepository.findByUsername(username);
-        if(libraryUser == null) {
-            throw new UsernameNotFoundException("User not found!");
-        }
-
-        return new LibraryUserDetails(libraryUser.get());
-    }
+    return new LibraryUserDetails(libraryUser.get());
+  }
 }

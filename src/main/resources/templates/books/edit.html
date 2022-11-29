@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Update books</title>
+  <meta charset="UTF-8">
+  <title>Update books</title>
 </head>
 <body>
 
 <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBookId()})}" th:object="${book}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{bookName}" id="name"/>
-    <br/>
-    <label for="year">Enter year of writing: </label>
-    <input type="text" th:field="*{yearOfWriting}" id="year"/>
-    <br/>
-    <label for="author">Enter author: </label>
-    <input type="text" th:field="*{author}" id="author"/>
-    <br/>
-    <input type="submit" value="Update">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{bookName}" id="name"/>
+  <br/>
+  <label for="year">Enter year of writing: </label>
+  <input type="text" th:field="*{yearOfWriting}" id="year"/>
+  <br/>
+  <label for="author">Enter author: </label>
+  <input type="text" th:field="*{author}" id="author"/>
+  <br/>
+  <input type="submit" value="Update">
 </form>
 
 </body>

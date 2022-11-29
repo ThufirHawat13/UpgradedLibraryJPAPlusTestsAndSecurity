@@ -14,70 +14,63 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class BookService {
-    private final BookRepository bookRepository;
 
-    private final BookDAO bookDAO;
+  private final BookRepository bookRepository;
 
-    @Autowired
-    public BookService(BookRepository bookRepository, BookDAO bookDAO) {
-        this.bookRepository = bookRepository;
-        this.bookDAO = bookDAO;
-    }
+  private final BookDAO bookDAO;
 
-    public List<Book> findAll() { return bookRepository.findAll(); }
+  @Autowired
+  public BookService(BookRepository bookRepository, BookDAO bookDAO) {
+    this.bookRepository = bookRepository;
+    this.bookDAO = bookDAO;
+  }
 
-    public Book findById(int id) {
-        Optional<Book> book = bookRepository.findById(id);
-        return book.orElse(null);
-    }
+  public List<Book> findAll() {
+    return bookRepository.findAll();
+  }
 
-    public Person haveOwner(Book book) {
-        return book.getPerson();
-    }
+  public Book findById(int id) {
+    Optional<Book> book = bookRepository.findById(id);
+    return book.orElse(null);
+  }
 
-    public List<Book> findByOwner(Person person) {
-        return bookRepository.findByPerson(person);
-    }
+  public Person haveOwner(Book book) {
+    return book.getPerson();
+  }
 
-    public List<Book> findByName(String name) {
-        return bookRepository.findByBookNameContaining(name);
-    }
+  public List<Book> findByOwner(Person person) {
+    return bookRepository.findByPerson(person);
+  }
 
-    @Transactional
-    public void save(Book book) {
-        bookRepository.save(book);
-    }
+  public List<Book> findByName(String name) {
+    return bookRepository.findByBookNameContaining(name);
+  }
 
-    @Transactional
-    public void update(int id, Book updBook) {
-        updBook.setBookId(id);
-        bookRepository.save(updBook);
-    }
+  @Transactional
+  public void save(Book book) {
+    bookRepository.save(book);
+  }
 
-    @Transactional
-    public void delete(int id) {
-        bookRepository.deleteById(id);
-    }
+  @Transactional
+  public void update(int id, Book updBook) {
+    updBook.setBookId(id);
+    bookRepository.save(updBook);
+  }
 
-    @Transactional
-    public void setHolder(int id, Person person) {
-        bookDAO.setHolder(id, person);
-    }
+  @Transactional
+  public void delete(int id) {
+    bookRepository.deleteById(id);
+  }
 
-    @Transactional
-    public void releaseHolder(int id) {
-        bookDAO.releaseHolder(id);
-    }
+  @Transactional
+  public void setHolder(int id, Person person) {
+    bookDAO.setHolder(id, person);
+  }
 
-
-
-
-
-
-
-
-
-
+  @Transactional
+  public void releaseHolder(int id) {
+    bookDAO.releaseHolder(id);
+  }
 
 
 }

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>All people</title>
+  <meta charset="UTF-8">
+  <title>All people</title>
 </head>
 <body>
 <form method="POST" th:action="@{/people/search}">
-    <label for="name">Try to enter name (and/or) surname:</label><br/>
-    <input id="name" type="text" name="name">
-    <input type="submit" value="Search!">
+  <label for="name">Try to enter name (and/or) surname:</label><br/>
+  <input id="name" type="text" name="name">
+  <input type="submit" value="Search!">
 </form>
 
 <div th:each="person : ${people}">
-    <a      th:href="@{/people/{id}(id=${person.getPersonId()})}"
-            th:text="${person.getNameSurname()}">person</a>
+  <a th:href="@{/people/{id}(id=${person.getPersonId()})}"
+     th:text="${person.getNameSurname()}">person</a>
 </div>
 
 <form th:action="@{/people/new}">
-    <input type="submit" value="Add new person">
+  <input type="submit" value="Add new person">
 </form>
 
 </body>
