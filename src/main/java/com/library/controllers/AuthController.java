@@ -51,7 +51,7 @@ public class AuthController {
 
     registrationService.register(libraryUser);
 
-    return "redirect:/auth/login";
+    return "redirect:/admin";
   }
 
 
