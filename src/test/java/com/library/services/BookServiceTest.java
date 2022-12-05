@@ -1,6 +1,6 @@
 package com.library.services;
 
-import com.library.DAO.BookDAO;
+import com.library.dao.BookDAO;
 import com.library.models.Book;
 import com.library.models.Person;
 import com.library.repositories.BookRepository;

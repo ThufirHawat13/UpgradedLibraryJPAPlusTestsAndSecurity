@@ -19,70 +19,76 @@ import org.springframework.validation.BindingResult;
 @SpringBootTest
 class PeopleControllerTest {
 
-    private final PeopleController peopleController;
+  private final PeopleController peopleController;
 
-    @Autowired
-    PeopleControllerTest(PeopleController peopleController) {
-        this.peopleController = peopleController;
-    }
+  @Autowired
+  PeopleControllerTest(PeopleController peopleController) {
+    this.peopleController = peopleController;
+  }
 
-    @MockBean
-    private PeopleService peopleService;
+  @MockBean
+  private PeopleService peopleService;
 
-    @MockBean
-    private BookService bookService;
+  @MockBean
+  private BookService bookService;
 
-    @Mock
-    private Person person;
-    @Mock
-    private Model model;
+  @Mock
+  private Person person;
+  @Mock
+  private Model model;
 
-    @Mock
-    private BindingResult bindingResult;
+  @Mock
+  private BindingResult bindingResult;
 
-    private int id = 0;
+  private int id = 0;
 
-    @Test
-    void index() {
-        peopleController.index(model);
+  @Test
+  void index() {
+    peopleController.index(model);
 
-        Mockito.verify(peopleService, Mockito.times(1)).findAll();
-    }
+    Mockito.verify(peopleService, Mockito.times(1))
+        .findAll();
+  }
 
-    @Test
-    void show() {
-        Mockito.when(peopleService.findById(id)).thenReturn(person);
-        peopleController.show(id, model);
+  @Test
+  void show() {
+    Mockito.when(peopleService.findById(id)).thenReturn(person);
+    peopleController.show(id, model);
 
-        Mockito.verify(peopleService, Mockito.times(1)).findById(id);
-    }
+    Mockito.verify(peopleService, Mockito.times(1))
+        .findById(id);
+  }
 
-    @Test
-    void create() {
-        peopleController.create(model, person, bindingResult);
+  @Test
+  void create() {
+    peopleController.create(model, person, bindingResult);
 
-        Mockito.verify(peopleService, Mockito.times(1)).save(person);
-    }
+    Mockito.verify(peopleService, Mockito.times(1))
+        .save(person);
+  }
 
-    @Test
-    void update() {
-        peopleController.update(id, model, person, bindingResult);
+  @Test
+  void update() {
+    peopleController.update(id, model, person, bindingResult);
 
-        Mockito.verify(peopleService, Mockito.times(1)).update(id, person);
-    }
+    Mockito.verify(peopleService, Mockito.times(1))
+        .update(id, person);
+  }
 
-    @Test
-    void delete() {
-        peopleController.delete(id);
+  @Test
+  void delete() {
+    peopleController.delete(id);
 
-        Mockito.verify(peopleService, Mockito.times(1)).delete(id);
-    }
+    Mockito.verify(peopleService, Mockito.times(1))
+        .delete(id);
+  }
 
-    @Test
-    void searchPersonFromName() {
-        String name = "n";
-        peopleController.searchPersonFromName(name, model);
+  @Test
+  void searchPersonFromName() {
+    String name = "n";
+    peopleController.searchPersonFromName(name, model);
 
-        Mockito.verify(peopleService, Mockito.times(1)).findByNameContains(name);
-    }
+    Mockito.verify(peopleService, Mockito.times(1))
+        .findByNameContains(name);
+  }
 }

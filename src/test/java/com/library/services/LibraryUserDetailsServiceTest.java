@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetails;
 
 class LibraryUserDetailsServiceTest {
 
@@ -29,10 +30,15 @@ class LibraryUserDetailsServiceTest {
     private LibraryUser libraryUser;
 
     @Mock
-    private LibraryUserDetails libraryUserDetails;
+    private UserDetails userDetails;
 
     @Test
     void loadUserByUsername() {
-        //TODO
+        String username = "n";
+        Mockito.when(libraryUserDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
+        Mockito.when(libraryUserRepository.findByUsername(username)).thenReturn(Optional.of(new LibraryUser("testUser", "testUser")));
+        userDetails = libraryUserDetailsService.loadUserByUsername(username);
+
+        Mockito.verify(libraryUserDetailsService, Mockito.times(1)).loadUserByUsername(username);
     }
 }

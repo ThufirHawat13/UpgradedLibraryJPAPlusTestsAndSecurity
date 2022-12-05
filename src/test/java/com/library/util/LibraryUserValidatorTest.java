@@ -1,7 +1,7 @@
 package com.library.util;
 
-import com.library.models.Person;
-import com.library.services.PeopleService;
+import com.library.models.LibraryUser;
+import com.library.services.LibraryUserService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,33 +16,33 @@ import org.springframework.validation.Errors;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class PersonValidatorTest {
+class LibraryUserValidatorTest {
 
-  private final PersonValidator personValidator;
+  private final LibraryUserValidator libraryUserValidator;
 
   @Autowired
-  PersonValidatorTest(PersonValidator personValidator) {
-    this.personValidator = personValidator;
+  LibraryUserValidatorTest(LibraryUserValidator libraryUserValidator) {
+    this.libraryUserValidator = libraryUserValidator;
   }
 
   @MockBean
-  private PeopleService peopleService;
+  private LibraryUserService libraryUserService;
   @Mock
   private Errors errors;
-  private static final String nameSurname = "Name Surname";
-  private static final Person person = Mockito.mock(Person.class);
+  private static final LibraryUser libraryUser = Mockito.mock(LibraryUser.class);
+  private static final String username = "username";
 
   @BeforeAll
   public static void setup() {
-    Mockito.when(person.getNameSurname())
-        .thenReturn(nameSurname);
+    Mockito.when(libraryUser.getUsername())
+        .thenReturn(username);
   }
 
   @Test
   void validateShouldAcceptUserWithNewNameAndSurname() {
-    Mockito.when(peopleService.findByNameSurname(person.getNameSurname()))
+    Mockito.when(libraryUserService.findByUsername(libraryUser.getUsername()))
         .thenReturn(null);
-    personValidator.validate(person, errors);
+    libraryUserValidator.validate(libraryUser, errors);
 
     Mockito.verify(errors, Mockito.times(0))
         .rejectValue(ArgumentMatchers.any(),
@@ -51,15 +51,14 @@ class PersonValidatorTest {
   }
 
   @Test
-  void validateShouldRejectUserWithAAlreadyUsedNameAndSurname() {
-    Mockito.when(peopleService.findByNameSurname(person.getNameSurname()))
-        .thenReturn(person);
-    personValidator.validate(person, errors);
+  void validateShouldNotAcceptUserWithNewNameAndSurname() {
+    Mockito.when(libraryUserService.findByUsername(libraryUser.getUsername()))
+        .thenReturn(libraryUser);
+    libraryUserValidator.validate(libraryUser, errors);
 
     Mockito.verify(errors, Mockito.times(1))
         .rejectValue(ArgumentMatchers.any(),
             ArgumentMatchers.any(),
             ArgumentMatchers.any());
   }
-
 }

@@ -20,88 +20,93 @@ import org.springframework.validation.BindingResult;
 @SpringBootTest
 class BookControllerTest {
 
-    private final BookController bookController;
+  private final BookController bookController;
 
-    @Autowired
-    BookControllerTest(BookController bookController, BookService bookService) {
-        this.bookController = bookController;
-    }
+  @Autowired
+  BookControllerTest(BookController bookController, BookService bookService) {
+    this.bookController = bookController;
+  }
 
-    @MockBean
-    private BookService bookService;
+  @MockBean
+  private BookService bookService;
 
-    @Mock
-    private Model model;
+  @Mock
+  private Model model;
 
-    @Mock
-    private Book book;
+  @Mock
+  private Book book;
 
-    @Mock
-    private BindingResult bindingResult;
+  @Mock
+  private BindingResult bindingResult;
 
-    private int id = 0;
+  private int id = 0;
 
 
+  @Test
+  void index() {
+    bookController.index(model);
 
-    @Test
-    void index() {
-        bookController.index(model);
+    Mockito.verify(bookService, Mockito.times(1))
+        .findAll();
+  }
 
-        Mockito.verify(bookService, Mockito.times(1)).findAll();
-    }
+  @Test
+  void show() {
+    Mockito.when(bookService.findById(id)).thenReturn(book);
+    bookController.show(id, model);
 
-    @Test
-    void show() {
-        Mockito.when(bookService.findById(id)).thenReturn(book);
-        bookController.show(id, model);
+    Mockito.verify(bookService, Mockito.times(1))
+        .findById(id);
+  }
 
-        Mockito.verify(bookService, Mockito.times(1))
-                .findById(id);
-    }
+  @Test
+  void create() {
+    bookController.create(model, book, bindingResult);
 
-    @Test
-    void create() {
-        bookController.create(model, book, bindingResult);
+    Mockito.verify(bookService, Mockito.times(1))
+        .save(book);
+  }
 
-        Mockito.verify(bookService, Mockito.times(1))
-                .save(book);
-    }
+  @Test
+  void update() {
+    bookController.update(id, model, book);
 
-    @Test
-    void update() {
-        bookController.update(id, model, book);
+    Mockito.verify(bookService, Mockito.times(1))
+        .update(id, book);
+  }
 
-        Mockito.verify(bookService, Mockito.times(1)).update(id, book);
-    }
+  @Test
+  void delete() {
+    bookController.delete(id);
 
-    @Test
-    void delete() {
-        bookController.delete(id);
+    Mockito.verify(bookService, Mockito.times(1))
+        .delete(id);
+  }
 
-        Mockito.verify(bookService, Mockito.times(1)).delete(id);
-    }
+  @Test
+  void setHolder() {
+    Person person = Mockito.mock(Person.class);
+    bookController.setHolder(id, model, person);
 
-    @Test
-    void setHolder() {
-        Person person = Mockito.mock(Person.class);
-        bookController.setHolder(id, model, person);
+    Mockito.verify(bookService, Mockito.times(1))
+        .setHolder(id, person);
+  }
 
-        Mockito.verify(bookService, Mockito.times(1)).setHolder(id, person);
-    }
+  @Test
+  void releaseHolder() {
+    bookController.releaseHolder(id);
 
-    @Test
-    void releaseHolder() {
-        bookController.releaseHolder(id);
+    Mockito.verify(bookService, Mockito.times(1))
+        .releaseHolder(id);
+  }
 
-        Mockito.verify(bookService, Mockito.times(1)).releaseHolder(id);
-    }
+  @Test
+  void searchBook() {
+    String bookName = "n";
+    bookController.searchBook(bookName, model);
 
-    @Test
-    void searchBook() {
-        String bookName = "n";
-        bookController.searchBook(bookName, model);
-
-        Mockito.verify(bookService, Mockito.times(1)).findByName(bookName);
-    }
+    Mockito.verify(bookService, Mockito.times(1))
+        .findByName(bookName);
+  }
 
 }

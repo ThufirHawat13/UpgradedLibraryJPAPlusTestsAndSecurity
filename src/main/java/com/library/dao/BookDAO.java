@@ -1,4 +1,4 @@
-package com.library.DAO;
+package com.library.dao;
 
 import com.library.models.Book;
 import com.library.models.Person;
